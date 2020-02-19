@@ -1,44 +1,67 @@
 #include<stdio.h>
-#include<time.h>
 #include<stdlib.h>
-#include<stdbool.h>
+#include<time.h>
 int count=0;
-/*********************************************/
-void swap(int *a,int *b){
-    int temp=*a;
-    *a=*b;
-    *b=temp;
+/***********************SORT*************************************************/
+void merge(int arr[], int l, int m, int r) 
+{ 
+    int i, j, k; 
+    int n1 = m - l + 1; 
+    int n2 =  r - m;    
+    int L[n1], R[n2];   
+    for (i = 0; i < n1; i++) 
+        L[i] = arr[l + i]; 
+    for (j = 0; j < n2; j++) 
+        R[j] = arr[m + 1+ j];   
+    i = 0; 
+    j = 0; 
+    k = l; 
+    while (i < n1 && j < n2) 
+    { count++;
+        if (L[i] <= R[j]) 
+        { 
+            arr[k] = L[i]; 
+            i++; 
+        } 
+        else
+        { 
+            arr[k] = R[j]; 
+            j++; 
+        } 
+        k++; 
+    } 
+  
+    while (i < n1) 
+    { count++;
+        arr[k] = L[i]; 
+        i++; 
+        k++; 
+    } 
+  
+    while (j < n2) 
+    { count++;
+        arr[k] = R[j]; 
+        j++; 
+        k++; 
+    } 
+} 
+  
+
+void mergeSort(int arr[], int l, int r) 
+{ 
+    if (l < r) 
+    { 
+        
+        int m = l+(r-l)/2;  
+       
+        mergeSort(arr, l, m); 
+        mergeSort(arr, m+1, r); 
+  
+        merge(arr, l, m, r); 
+    } 
 }
-void heapify(int arr[],int size,int i){
-    int large=i;
-    int l=2*i+1;
-    int r=2*i+2;
-    if(l < size && arr[l]>arr[large] && ++count)
-        large=l;
-    if(r < size && arr[r]>arr[large] && ++count) 
-        large=r;
-
-        if(large!=i){
-            swap(&arr[i],&arr[large]);
-            
-            heapify(arr,size,large);
-        }
-}
-
-void heap_sort(int arr[],int n){
-    for(int i=n/2 -1 ;i>=0;i--){
-        heapify(arr,n,i);
-    }
-    for(int i=n-1;i>=0;i--){
-        swap(&arr[0],&arr[i]);
-        heapify(arr,i,0);
-    }
-
-}
-
- 
-/*********************************************/
-
+/*************************************************************************/
+/*********************INPUT*****************************/
 int esearch(int arr[],int n,int x){
     for(int i=0;i<n;i++){
         if(arr[i]==x){
@@ -101,7 +124,7 @@ while(row--){
         fscanf(fp,"%d",&arr[i]);
 
     }
-    heap_sort(arr,n);
+    mergeSort(arr,0,n-1);
     for(int i=0;i<n;i++){
         printf("%d ",arr[i]);
         fprintf(fp1," %d",arr[i]);
@@ -111,6 +134,7 @@ while(row--){
     }
 }
 
+
 int main(){
 int n,r,range;
 printf("Enter the Number of elements \nand Number of arrays\nand the range of integer : ");
@@ -119,7 +143,6 @@ scanf("%d%d%d",&n,&r,&range);
 
 create_inp_txt(n,r,range);
 read_file_sort(n,r);
-printf("Total No of Comparisn : %d \n", count/r );
-
+printf("Avg No of Comparisn : %d \n", count/r );
 
 }
