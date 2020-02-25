@@ -52,11 +52,11 @@ void heapify(struct heap* Heap,int idx){
     }
     
 }
-
+/******************************************************/
 int isSizeone(struct heap* Heap){
     return (Heap->size==1);
 }
-
+/******************************************************/
 struct node* extractmin(struct heap* Heap){
     struct node* temp=Heap->arr[0];
     Heap->arr[0]=Heap->arr[Heap->size-1];
@@ -64,7 +64,7 @@ struct node* extractmin(struct heap* Heap){
     heapify(Heap,0);
     return temp;
 }
-
+/******************************************************/
 void insert_heap(struct heap* Heap,struct node* node){
     ++Heap->size;
     int i=Heap->size-1;
@@ -74,7 +74,7 @@ void insert_heap(struct heap* Heap,struct node* node){
     }
     Heap->arr[i]=node;
 }
-
+/******************************************************/
 void buildheap(struct heap* Heap){
     int n =Heap->size-1;
     int i;
@@ -82,7 +82,7 @@ void buildheap(struct heap* Heap){
         heapify(Heap,i);
     }
 }
-
+/******************************************************/
 void printArr(int arr[], int n) 
 { 
     int i; 
@@ -90,11 +90,11 @@ void printArr(int arr[], int n)
         printf("%d", arr[i]);   
     printf("\n"); 
 } 
-
+/******************************************************/
 int isleaf(struct node* root){
     return !(root->left) && !(root->right);
 }
-
+/******************************************************/
 struct heap* create_build_heap(char data[],int freq[],int size){
     int i=0;
     struct heap* Heap=create_heap(size);
@@ -105,7 +105,7 @@ struct heap* create_build_heap(char data[],int freq[],int size){
     buildheap(Heap);
     return Heap;
 }
-
+/******************************************************/
 struct node* build_huff_tree(char data[],int freq[],int size){
     struct node *left,*top,*right;
     struct heap *Heap=create_build_heap(data,freq,size);
@@ -119,6 +119,7 @@ struct node* build_huff_tree(char data[],int freq[],int size){
     }
 return extractmin(Heap);
 }
+/******************************************************/
 void printcode(struct node* root,int arr[],int top){
     if (root->left) {  
         arr[top] = 0; 
@@ -133,14 +134,14 @@ void printcode(struct node* root,int arr[],int top){
         printArr(arr,top);
     }
 }
-
+/******************************************************/
 void Huffman(char data[],int freq[],int size){
     struct node* root=build_huff_tree(data,freq,size);
     int arr[100],top=0;
     printcode(root,arr,top);
 }
 
-
+/******************************************************/
 int main(){
 char arr[] = { 'a', 'b', 'c', 'd', 'e', 'f' }; 
 int freq[] = { 21,61,51,14,15,10 }; 
