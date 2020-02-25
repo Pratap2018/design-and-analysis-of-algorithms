@@ -117,5 +117,5 @@ start_permute(n);
 fclose(fp);
 row=fact(n);
 read_file_sort(n,row);
-printf(" avarage no of comparisn  %lld",count/row);
+printf(" average no of comparison  %lld\n",count/row);
 }
